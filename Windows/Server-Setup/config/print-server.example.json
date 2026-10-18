@@ -1,0 +1,15 @@
+{
+  "Printers": [
+    {
+      "Name": "Office-Printer",
+      "DriverName": "REPLACE WITH EXACT INSTALLED X64 DRIVER NAME",
+      "Address": "192.0.2.50",
+      "PortNumber": 9100,
+      "Shared": true,
+      "ShareName": "OfficePrinter",
+      "Location": "First floor",
+      "Comment": "Office network printer",
+      "PrintUsers": ["CONTOSO\\OfficePrinter-Users"]
+    }
+  ]
+}

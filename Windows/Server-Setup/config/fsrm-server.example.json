@@ -1,0 +1,10 @@
+{
+  "Quotas": [
+    {
+      "Path": "D:\\Shares\\DepartmentData",
+      "SizeGB": 100,
+      "SoftLimit": true,
+      "Description": "Report usage above 100 GB without blocking writes"
+    }
+  ]
+}

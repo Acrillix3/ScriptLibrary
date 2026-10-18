@@ -1,6 +1,6 @@
 ﻿# Windows script index
 
-67 operational PowerShell scripts and 7 Veeam code-validation scripts, grouped by task. Each script documents its own flags at the top. Reports default to Windows\Reports.
+82 operational PowerShell scripts and 13 code-validation scripts, grouped by task. Each script documents its own flags at the top. Reports default to Windows\Reports.
 
 ## Active Directory
 
@@ -160,3 +160,38 @@
 | [Test-VeeamPackage.ps1](Veeam-Validation/Test-VeeamPackage.ps1) | Checks Veeam script syntax, short headers, category placement, and passive suite behavior. |
 
 See [Veeam usage and scope](VEEAM-GUIDE.md) and [Veeam validation](VEEAM-VALIDATION.md).
+
+
+## Server-Setup
+
+| Script | What it does |
+|---|---|
+| [Initialize-SqlServerPrerequisites.ps1](Server-Setup/Initialize-SqlServerPrerequisites.ps1) | Checks SQL preparation baselines and creates new protected data, log, tempdb and backup directories. |
+| [Initialize-WindowsServer.ps1](Server-Setup/Initialize-WindowsServer.ps1) | Plans or applies selected server naming, time zone and PowerShell remoting settings. |
+| [Install-DhcpServer.ps1](Server-Setup/Install-DhcpServer.ps1) | Plans or installs the local DHCP role and optionally creates one IPv4 scope with safe options and explicit AD authorization. |
+| [Install-DnsServer.ps1](Server-Setup/Install-DnsServer.ps1) | Plans or installs the local DNS role and safely adds optional primary zones and forwarders. |
+| [Install-DomainController.ps1](Server-Setup/Install-DomainController.ps1) | Plans or stages AD DS and, when explicitly requested, promotes this server into a new forest or an existing domain. |
+| [Install-FileServer.ps1](Server-Setup/Install-FileServer.ps1) | Plan or install the File Server role, protected NTFS folders, and encrypted SMB shares from JSON. |
+| [Install-FsrmServer.ps1](Server-Setup/Install-FsrmServer.ps1) | Plan or install File Server Resource Manager and optional folder quotas from JSON. |
+| [Install-HyperVHost.ps1](Server-Setup/Install-HyperVHost.ps1) | Plan or install Hyper-V and optionally create an external switch in a separate run. |
+| [Install-NpsServer.ps1](Server-Setup/Install-NpsServer.ps1) | Plans or installs NPS and optionally creates one trusted RADIUS client on a member server. |
+| [Install-PrintServer.ps1](Server-Setup/Install-PrintServer.ps1) | Plan or install the Print Server role and optional controlled TCP/IP printer queues from JSON. |
+| [Install-RemoteDesktopServer.ps1](Server-Setup/Install-RemoteDesktopServer.ps1) | Stage RDS roles, then optionally create a new single-host session deployment with explicit licensing. |
+| [Install-WebServer.ps1](Server-Setup/Install-WebServer.ps1) | Stage IIS features and optionally create new stopped sites and application pools from JSON. |
+| [Install-WindowsServerBackup.ps1](Server-Setup/Install-WindowsServerBackup.ps1) | Plans or installs Windows Server Backup and optionally creates a new scheduled local-volume policy. |
+| [Join-ServerDomain.ps1](Server-Setup/Join-ServerDomain.ps1) | Plans or joins the local workgroup server to an Active Directory domain and reports any required restart. |
+| [Set-ServerNetwork.ps1](Server-Setup/Set-ServerNetwork.ps1) | Plans or applies one explicit static IPv4 address, optional gateway and ordered DNS server list. |
+
+
+## Server-Setup-Validation
+
+| Script | What it does |
+|---|---|
+| [Invoke-ServerSetupValidation.ps1](Server-Setup-Validation/Invoke-ServerSetupValidation.ps1) | Runs all five server setup validation suites with mocked Windows providers. |
+| [Test-ApplicationRoleSetup.ps1](Server-Setup-Validation/Test-ApplicationRoleSetup.ps1) | Runs isolated mocked checks for RDS, IIS, and Hyper-V setup tools without changing server roles. |
+| [Test-BaseAndKeyRoleSetup.ps1](Server-Setup-Validation/Test-BaseAndKeyRoleSetup.ps1) | Tests server baseline, network, SQL prerequisites, backup policy, NPS clients, and restart confirmation with mocked Windows providers. |
+| [Test-IdentityServerSetup.ps1](Server-Setup-Validation/Test-IdentityServerSetup.ps1) | Tests the four identity and network server setup tools with mocked Windows providers. |
+| [Test-ServerSetupPackage.ps1](Server-Setup-Validation/Test-ServerSetupPackage.ps1) | Checks the server setup package's syntax, documented flags, plan defaults and restart gates. |
+| [Test-StorageAndPrintSetup.ps1](Server-Setup-Validation/Test-StorageAndPrintSetup.ps1) | Tests file-server, print-server, and FSRM setup behavior with mocked Windows management commands. |
+
+See [server setup instructions](SERVER-SETUP-GUIDE.md) and [validation results](SERVER-SETUP-VALIDATION.md).

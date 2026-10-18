@@ -1,0 +1,12 @@
+{
+  "Shares": [
+    {
+      "Name": "DepartmentData",
+      "Path": "D:\\Shares\\DepartmentData",
+      "Description": "Department files",
+      "FullAccess": ["CONTOSO\\FileServer-Administrators"],
+      "ChangeAccess": ["CONTOSO\\DepartmentData-Modify"],
+      "ReadAccess": ["CONTOSO\\DepartmentData-Read"]
+    }
+  ]
+}

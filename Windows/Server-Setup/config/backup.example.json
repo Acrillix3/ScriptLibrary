@@ -1,0 +1,9 @@
+{
+  "SchemaVersion": 1,
+  "SourceVolumes": ["C:", "D:"],
+  "TargetVolume": "E:",
+  "DailySchedule": ["22:00"],
+  "IncludeSystemState": true,
+  "IncludeBareMetal": true,
+  "MinimumTargetFreeGB": 50
+}

@@ -1,0 +1,13 @@
+{
+  "Sites": [
+    {
+      "Name": "InternalPortal",
+      "PhysicalPath": "D:\\Sites\\InternalPortal",
+      "AppPool": "InternalPortalPool",
+      "Protocol": "http",
+      "IPAddress": "127.0.0.1",
+      "Port": 8080,
+      "HostName": ""
+    }
+  ]
+}

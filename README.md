@@ -14,6 +14,8 @@ General Windows tools use Windows PowerShell 5.1. Veeam tools require the runtim
 | [Network and DNS](Windows/Network-and-DNS) | Connectivity, DNS, DHCP, remote desktop, mapped drives, and time | 6 |
 | [Printing](Windows/Printing) | Printers, ports, queues, and spooler diagnostics | 1 |
 | [Security](Windows/Security) | Certificate metadata and firewall rule evidence | 2 |
+| [Server Setup](Windows/Server-Setup) | Windows Server 2022/2025 role and baseline setup; SQL prerequisites only; confirmed restarts | 15 |
+| [Server Setup Validation](Windows/Server-Setup-Validation) | Mocked server setup tests and package validation | 6 |
 | [Services](Windows/Services) | Windows services and scheduled tasks | 2 |
 | [Software](Windows/Software) | Installed application inventory | 1 |
 | [Storage and Permissions](Windows/Storage-and-Permissions) | Disk capacity, file sizes, storage health, permissions, and SMB handles | 5 |
@@ -25,7 +27,7 @@ General Windows tools use Windows PowerShell 5.1. Veeam tools require the runtim
 | [Web Services](Windows/Web-Services) | IIS websites, bindings, application pools, and recent events | 1 |
 | [Workstation Setup](Windows/Workstation-Setup) | Readiness checks against an editable baseline | 1 |
 
-There are 67 operational Windows scripts and 7 Veeam code-validation scripts. See the [complete script index](Windows/SCRIPT-INDEX.md) and [examples for the 20 new tools](Windows/NEW-SCRIPTS.md). Validation details are in [Windows/VALIDATION.md](Windows/VALIDATION.md). Veeam usage and examples are in [Windows/VEEAM-GUIDE.md](Windows/VEEAM-GUIDE.md); Veeam test results are in [Windows/VEEAM-VALIDATION.md](Windows/VEEAM-VALIDATION.md).
+There are 82 operational Windows scripts and 13 code-validation scripts. See the [complete script index](Windows/SCRIPT-INDEX.md) and [examples for the 20 new tools](Windows/NEW-SCRIPTS.md). Validation details are in [Windows/VALIDATION.md](Windows/VALIDATION.md). Veeam usage and examples are in [Windows/VEEAM-GUIDE.md](Windows/VEEAM-GUIDE.md); Veeam test results are in [Windows/VEEAM-VALIDATION.md](Windows/VEEAM-VALIDATION.md). Server setup instructions are in [Windows/SERVER-SETUP-GUIDE.md](Windows/SERVER-SETUP-GUIDE.md), with [validation results](Windows/SERVER-SETUP-VALIDATION.md).
 
 Examples below assume your current directory is the ScriptLibrary root:
 
@@ -36,7 +38,7 @@ Examples below assume your current directory is the ScriptLibrary root:
 .\Windows\Network-and-DNS\Invoke-DNSAudit.ps1 -ComputerName dc01.contoso.com -ExpectedDomain contoso.com
 ~~~
 
-Replace example names and paths with values from your environment. General tools and passive Veeam suites collect reports without changing configuration. Intensive Veeam integrity/CRC tests require explicit run flags and are excluded from the passive suites. By default, reports go into Windows\Reports; use -OutputDirectory to choose another destination. Each run creates its own report folder.
+Replace example names and paths with values from your environment. General tools and passive Veeam suites collect reports without changing configuration. Server setup tools default to plans, require -Apply for changes, and ask separately before required server/service restarts. Intensive Veeam integrity/CRC tests require explicit run flags and are excluded from the passive suites. By default, reports go into Windows\Reports; use -OutputDirectory to choose another destination. Each run creates its own report folder.
 
 The original AD inventory/audit scripts require the Microsoft ActiveDirectory module; the new local trust and Group Policy tools use their documented Windows facilities. The DNS audit requires DnsServer; printing diagnostics require PrintManagement. Use an account that can read the requested data. User-specific software, printers, and mapped drives reflect the executing user. Audit results that are partial or unknown need their error reports reviewed.
 
