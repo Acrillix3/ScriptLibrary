@@ -1,0 +1,13 @@
+{
+  "MinimumFreeDiskGB": 20,
+  "DiskMountPoint": "C:",
+  "RequireDomainJoined": true,
+  "ExpectedDomain": "",
+  "RequireEncryption": true,
+  "ExpectedApplications": [
+    { "NamePattern": "Microsoft Edge*", "MinimumVersion": "" }
+  ],
+  "ExpectedServices": [
+    { "Name": "Spooler", "ExpectedState": "Running" }
+  ]
+}
