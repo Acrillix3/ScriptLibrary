@@ -1,0 +1,362 @@
+[
+  {
+    "name": "get-device-information",
+    "category": "Device-Information",
+    "description": "Inventory the local operating system, CPU, memory, hardware model, firmware, and virtualization.",
+    "flags": "No script-specific flags.",
+    "options": "",
+    "mutating": false
+  },
+  {
+    "name": "check-hardware-health",
+    "category": "Device-Information",
+    "description": "Read existing SMART/NVMe health and thermal sensors without starting tests or waking standby disks.",
+    "flags": "--device /dev/DEVICE (optional); --temperature-warn CELSIUS (default 80).",
+    "options": "device temperature-warn",
+    "mutating": false
+  },
+  {
+    "name": "audit-drivers-and-firmware",
+    "category": "Device-Information",
+    "description": "Inventory loaded kernel modules, PCI drivers, network firmware versions, and recent firmware failure counts.",
+    "flags": "No script-specific flags.",
+    "options": "",
+    "mutating": false
+  },
+  {
+    "name": "get-battery-health",
+    "category": "Device-Information",
+    "description": "Read battery charge, cycle count, and full-capacity versus design-capacity wear from sysfs.",
+    "flags": "--wear-warning-percent PERCENT (remaining design capacity; default 80).",
+    "options": "wear-warning-percent",
+    "mutating": false
+  },
+  {
+    "name": "test-virtualization-readiness",
+    "category": "Device-Information",
+    "description": "Check CPU virtualization hints, KVM availability and permissions, and IOMMU visibility.",
+    "flags": "No script-specific flags.",
+    "options": "",
+    "mutating": false
+  },
+  {
+    "name": "test-network-connectivity",
+    "category": "Network-and-DNS",
+    "description": "Inspect interfaces, routes, and an explicitly selected TCP endpoint.",
+    "flags": "--target HOST --port NUMBER (default 443); no external target is contacted unless selected.",
+    "options": "target port",
+    "mutating": false
+  },
+  {
+    "name": "audit-dns-configuration",
+    "category": "Network-and-DNS",
+    "description": "Inspect active resolver settings and optional forward and reverse lookups.",
+    "flags": "--name HOSTNAME --address IP --server DNS_IP; lookups use the current resolver unless --server is supplied.",
+    "options": "name address server",
+    "mutating": false
+  },
+  {
+    "name": "audit-firewall-rules",
+    "category": "Network-and-DNS",
+    "description": "Audit available firewall backends and local listeners without changing rules.",
+    "flags": "No script-specific flags.",
+    "options": "",
+    "mutating": false
+  },
+  {
+    "name": "configure-static-network",
+    "category": "Network-and-DNS",
+    "description": "Plan a static IPv4 Ethernet profile cloned from the active NetworkManager profile, with separate activation confirmation.",
+    "flags": "--backend networkmanager --interface NAME --connection EXISTING_UUID --profile NEW_NAME --address IPv4/PREFIX --gateway IPv4 --dns IPv4[,IPv4]; --apply still asks before activation; existing profiles are preserved.",
+    "options": "backend interface connection profile address gateway dns",
+    "mutating": true
+  },
+  {
+    "name": "test-remote-access",
+    "category": "Network-and-DNS",
+    "description": "Inspect SSH service configuration and listeners, with an optional TCP reachability test.",
+    "flags": "--target HOST --port NUMBER (default 22); --user USER --client-address IP --local-address IP provide an sshd Match context.",
+    "options": "target port user client-address local-address",
+    "mutating": false
+  },
+  {
+    "name": "get-printer-inventory",
+    "category": "Printing",
+    "description": "List CUPS queues, default destination, accepting state, device endpoints, and installed driver choices.",
+    "flags": "--queue NAME optionally limits queue details; installed driver listing remains global.",
+    "options": "queue",
+    "mutating": false
+  },
+  {
+    "name": "test-printer-connectivity",
+    "category": "Printing",
+    "description": "Test a selected printer TCP endpoint and optionally read-only IPP attributes.",
+    "flags": "--target HOST --protocol ipp|ipps|raw (default ipp) --port NUMBER --uri ipp[s]://HOST/PATH; IPP defaults to /ipp/print and port 631, raw to 9100.",
+    "options": "target protocol port uri",
+    "mutating": false
+  },
+  {
+    "name": "configure-network-printer",
+    "category": "Printing",
+    "description": "Plan or create a local CUPS queue using IPP Everywhere or an explicitly approved installed model.",
+    "flags": "--queue NAME --uri ipp[s]://HOST/PATH|socket://HOST:PORT --driver MODEL (default everywhere); only creates a new unshared queue.",
+    "options": "queue uri driver",
+    "mutating": true
+  },
+  {
+    "name": "repair-print-queue",
+    "category": "Printing",
+    "description": "Plan or perform one narrow CUPS queue recovery action without deleting jobs.",
+    "flags": "--queue NAME --action enable|accept|release (default enable); release asks for separate confirmation before pending jobs resume.",
+    "options": "queue action",
+    "mutating": true
+  },
+  {
+    "name": "export-print-configuration",
+    "category": "Printing",
+    "description": "Export sanitized CUPS queue and security metadata into the private report directory.",
+    "flags": "No script-specific flags; this is a metadata export, not a complete restorable CUPS backup.",
+    "options": "",
+    "mutating": false
+  },
+  {
+    "name": "audit-service-health",
+    "category": "Services",
+    "description": "Inspect service startup, failed states, and selected service dependencies using systemd or OpenRC.",
+    "flags": "--service NAME optionally selects one service for detailed state and dependency checks.",
+    "options": "service",
+    "mutating": false
+  },
+  {
+    "name": "audit-scheduled-jobs",
+    "category": "Services",
+    "description": "Inventory systemd timers, cron metadata, and pending at jobs without exporting scheduled command text.",
+    "flags": "--user USER selects the crontab owner (default current user); run with appropriate access to inspect another user.",
+    "options": "user",
+    "mutating": false
+  },
+  {
+    "name": "configure-service-state",
+    "category": "Services",
+    "description": "Plan or change one selected service's startup and runtime state, with separate restart confirmation.",
+    "flags": "--service NAME --enabled yes|no|keep (default keep) --state start|stop|restart|keep (default keep) --runlevel NAME (OpenRC, default default).",
+    "options": "service enabled state runlevel",
+    "mutating": true
+  },
+  {
+    "name": "audit-web-services",
+    "category": "Services",
+    "description": "Check installed nginx and Apache configuration syntax, listeners, and optional remote TLS certificate dates.",
+    "flags": "--host HOST --port NUMBER (default 443) selects a TLS endpoint; no external endpoint is contacted otherwise.",
+    "options": "host port",
+    "mutating": false
+  },
+  {
+    "name": "audit-time-synchronization",
+    "category": "Services",
+    "description": "Detect active time services, inspect configured sources and synchronization status, and flag competing daemons.",
+    "flags": "No script-specific flags.",
+    "options": "",
+    "mutating": false
+  },
+  {
+    "name": "get-software-inventory",
+    "category": "Software",
+    "description": "Inventory installed native packages and optional Flatpak and Snap applications.",
+    "flags": "--include-flatpak yes|no (default no); --include-snap yes|no (default no).",
+    "options": "include-flatpak include-snap",
+    "mutating": false
+  },
+  {
+    "name": "audit-package-health",
+    "category": "Software",
+    "description": "Check package database consistency and optionally verify a selected installed package.",
+    "flags": "--package NAME (optional integrity check).",
+    "options": "package",
+    "mutating": false
+  },
+  {
+    "name": "audit-package-repositories",
+    "category": "Software",
+    "description": "Audit configured repository identities, trust settings, and source entries without refreshing metadata.",
+    "flags": "No script-specific flags.",
+    "options": "",
+    "mutating": false
+  },
+  {
+    "name": "plan-system-updates",
+    "category": "Software",
+    "description": "Plan system updates using cached metadata, held packages, free space, and restart indicators.",
+    "flags": "No script-specific flags. Never installs or refreshes package indexes.",
+    "options": "",
+    "mutating": false
+  },
+  {
+    "name": "install-approved-software",
+    "category": "Software",
+    "description": "Install a reviewed package manifest through the detected distribution package manager.",
+    "flags": "--manifest PATH (required TSV: family and package); --profile NAME (report label, default approved).",
+    "options": "manifest profile",
+    "mutating": true
+  },
+  {
+    "name": "get-filesystem-capacity",
+    "category": "Storage-and-Permissions",
+    "description": "Check space and inode capacity on a selected filesystem and inventory mount types and read-only states.",
+    "flags": "--path /PATH (default /); --space-warning-percent PERCENT (default 85); --inode-warning-percent PERCENT (default 85).",
+    "options": "path space-warning-percent inode-warning-percent",
+    "mutating": false
+  },
+  {
+    "name": "find-large-and-open-deleted-files",
+    "category": "Storage-and-Permissions",
+    "description": "Find large files within a bounded directory scan and inventory deleted files still held open.",
+    "flags": "--path /PATH (default /var/log); --minimum-mib MIB (default 100); --max-depth DEPTH (default 4, maximum 8); --limit COUNT (default 50, maximum 200); --timeout-seconds SECONDS (default 30, maximum 120).",
+    "options": "path minimum-mib max-depth limit timeout-seconds",
+    "mutating": false
+  },
+  {
+    "name": "audit-filesystem-permissions",
+    "category": "Storage-and-Permissions",
+    "description": "Audit a selected tree for world-writable objects, unprotected writable directories, special executable bits, and root ACL metadata.",
+    "flags": "--path /PATH (default /etc); --max-depth DEPTH (default 3, maximum 8); --limit COUNT (default 100, maximum 200); --timeout-seconds SECONDS (default 30, maximum 120).",
+    "options": "path max-depth limit timeout-seconds",
+    "mutating": false
+  },
+  {
+    "name": "audit-network-shares",
+    "category": "Storage-and-Permissions",
+    "description": "Inspect selected Samba security settings, NFS export flags, and mounted network-share types without exposing passwords.",
+    "flags": "No script-specific flags.",
+    "options": "",
+    "mutating": false
+  },
+  {
+    "name": "audit-storage-layout",
+    "category": "Storage-and-Permissions",
+    "description": "Inventory block-device topology, LVM thin/snapshot capacity, MD RAID, Btrfs, and ZFS where present.",
+    "flags": "--path /PATH (default /; used for Btrfs inspection).",
+    "options": "path",
+    "mutating": false
+  },
+  {
+    "name": "collect-support-bundle",
+    "category": "Troubleshooting",
+    "description": "Build a private support report containing selected system, storage, network, service, and package metadata.",
+    "flags": "--include-network yes|no (default yes); --include-packages yes|no (default yes); --package-limit COUNT (default 200, maximum 1000).",
+    "options": "include-network include-packages package-limit",
+    "mutating": false
+  },
+  {
+    "name": "get-performance-snapshot",
+    "category": "Troubleshooting",
+    "description": "Collect bounded CPU, memory, disk counters, load, process names, and pressure-stall snapshots.",
+    "flags": "--samples COUNT (default 5, maximum 10); --interval-seconds SECONDS (default 1, maximum 5).",
+    "options": "samples interval-seconds",
+    "mutating": false
+  },
+  {
+    "name": "audit-boot-and-kernel-errors",
+    "category": "Troubleshooting",
+    "description": "Summarize kernel error classes for a selected boot and list crash metadata without exporting raw messages or dumps.",
+    "flags": "--boot current|previous (default current); --entries COUNT (default 1000, maximum 10000).",
+    "options": "boot entries",
+    "mutating": false
+  },
+  {
+    "name": "audit-security-policy-denials",
+    "category": "Troubleshooting",
+    "description": "Check SELinux/AppArmor state, a selected path's label metadata, and bounded denial counts without disabling protection.",
+    "flags": "--path /PATH (default /); --entries COUNT (default 1000, maximum 10000).",
+    "options": "path entries",
+    "mutating": false
+  },
+  {
+    "name": "check-restart-requirements",
+    "category": "Troubleshooting",
+    "description": "Report reboot indicators, supported library/service restart hints, and running-kernel module availability without restarting anything.",
+    "flags": "No script-specific flags.",
+    "options": "",
+    "mutating": false
+  },
+  {
+    "name": "audit-users-and-groups",
+    "category": "Users-and-Groups",
+    "description": "Audit local account IDs, account state, home directories, and local versus NSS identities.",
+    "flags": "--user NAME (optional detailed account state).",
+    "options": "user",
+    "mutating": false
+  },
+  {
+    "name": "audit-elevated-access",
+    "category": "Users-and-Groups",
+    "description": "Audit privileged group membership and sudo/doas policy metadata without exposing policy command arguments.",
+    "flags": "No script-specific flags.",
+    "options": "",
+    "mutating": false
+  },
+  {
+    "name": "audit-ssh-access",
+    "category": "Users-and-Groups",
+    "description": "Audit effective SSH access policy and selected public-key fingerprints and file permissions.",
+    "flags": "--user NAME (optional local account); --client-address IP and --client-host HOST (both needed with user for Match evaluation).",
+    "options": "user client-address client-host",
+    "mutating": false
+  },
+  {
+    "name": "provision-local-user",
+    "category": "Users-and-Groups",
+    "description": "Create a new local account with optional local groups, expiry, and one public SSH key.",
+    "flags": "--user NAME (required); --groups GROUP1,GROUP2; --expires YYYY-MM-DD; --public-key PATH. Requires an unused /home/NAME; password remains locked.",
+    "options": "user groups expires public-key",
+    "mutating": true
+  },
+  {
+    "name": "audit-domain-integration",
+    "category": "Users-and-Groups",
+    "description": "Audit realmd, SSSD, winbind, Kerberos prerequisites, and domain identity resolution without rejoining.",
+    "flags": "--identity NAME (optional directory identity to resolve); --domain NAME (optional DNS SRV lookup).",
+    "options": "identity domain",
+    "mutating": false
+  },
+  {
+    "name": "initialize-technician-workstation",
+    "category": "Workstation-Setup",
+    "description": "Plan or install an approved technician support-tool profile using native distribution packages.",
+    "flags": "--profile minimal|technician (default minimal). Review the generated manifest before --apply.",
+    "options": "profile",
+    "mutating": true
+  },
+  {
+    "name": "configure-workstation-baseline",
+    "category": "Workstation-Setup",
+    "description": "Plan or configure an explicit hostname, timezone, or existing generated locale.",
+    "flags": "--hostname NAME; --timezone AREA/CITY; --locale LOCALE (at least one required). Locale must already be generated.",
+    "options": "hostname timezone locale",
+    "mutating": true
+  },
+  {
+    "name": "configure-time-synchronization",
+    "category": "Workstation-Setup",
+    "description": "Configure approved NTP sources for the single active chrony or timesyncd daemon, with separate restart confirmation.",
+    "flags": "--servers HOST1,HOST2 (required); --daemon auto|chrony|timesyncd|ntpd (default auto). Chrony keeps other sources; ntpd requires manual review.",
+    "options": "servers daemon",
+    "mutating": true
+  },
+  {
+    "name": "configure-endpoint-firewall",
+    "category": "Workstation-Setup",
+    "description": "Add one approved port rule to an already active UFW or firewalld policy while preserving management access.",
+    "flags": "--port 1..65535 (required); --protocol tcp|udp (default tcp); --backend auto|ufw|firewalld; --zone NAME (firewalld required); --source CIDR (UFW optional).",
+    "options": "port protocol backend zone source",
+    "mutating": true
+  },
+  {
+    "name": "test-workstation-readiness",
+    "category": "Workstation-Setup",
+    "description": "Test a workstation against an explicit resource and capability baseline.",
+    "flags": "--min-memory-mb NUMBER (default 4096); --min-root-free-mb NUMBER (default 10240); --required-commands comma-list (default curl,ssh); --dns-name HOST (optional).",
+    "options": "min-memory-mb min-root-free-mb required-commands dns-name",
+    "mutating": false
+  }
+]

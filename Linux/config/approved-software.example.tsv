@@ -1,0 +1,15 @@
+# family<TAB>package; edit and approve before --apply
+debian	curl
+debian	python3
+rhel	curl
+rhel	python3
+fedora	curl
+fedora	python3
+amazon	curl
+amazon	python3
+suse	curl
+suse	python3
+arch	curl
+arch	python
+alpine	curl
+alpine	python3

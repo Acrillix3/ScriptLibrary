@@ -1,6 +1,6 @@
-﻿# Windows script index
+# Windows script index
 
-82 operational PowerShell scripts and 13 code-validation scripts, grouped by task. Each script documents its own flags at the top. Reports default to Windows\Reports.
+90 operational PowerShell scripts and 18 code-validation scripts, grouped by task. Each script documents its own flags at the top. Reports default to Windows\Reports.
 
 ## Active Directory
 
@@ -22,6 +22,8 @@
 
 | Script | What it does |
 |---|---|
+| [Get-ConnectedPeripheralAudit.ps1](Device-Information/Get-ConnectedPeripheralAudit.ps1) | Audits currently present peripherals with optional serial identifiers and provider visibility. |
+| [Get-ConnectedMonitorDetails.ps1](Device-Information/Get-ConnectedMonitorDetails.ps1) | Reports connected monitor EDID identity, dimensions, connection and preferred mode. |
 | [Export-BatteryHealth.ps1](Device-Information/Export-BatteryHealth.ps1) | Creates a battery usage and capacity report with a battery-device inventory. |
 | [Get-DeviceInformation.ps1](Device-Information/Get-DeviceInformation.ps1) | Collects computer, Windows, hardware, uptime, and domain details for a support ticket. |
 | [Get-DriverIssues.ps1](Device-Information/Get-DriverIssues.ps1) | Reports Plug and Play device errors and available signed-driver metadata. |
@@ -41,12 +43,14 @@
 
 | Script | What it does |
 |---|---|
+| [Clear-PrinterQueueAndCache.ps1](Printing/Clear-PrinterQueueAndCache.ps1) | Plans or clears selected print queues and optionally recovers the default spool cache with separately confirmed Spooler cycling. |
 | [Get-PrinterDiagnostics.ps1](Printing/Get-PrinterDiagnostics.ps1) | Reports printers, ports, queued jobs, the default printer, and spooler status. |
 
 ## Security
 
 | Script | What it does |
 |---|---|
+| [Test-Php2ShellExposure.ps1](Security/Test-Php2ShellExposure.ps1) | Audits local PHP version/configuration evidence for CVE-2026-109618 and CVE-2026-109619 without executing binaries or exploits. |
 | [Get-CertificateExpiryReport.ps1](Security/Get-CertificateExpiryReport.ps1) | Reports certificate expiry, intended usage, and optional chain-trust results from selected local stores. |
 | [Get-FirewallRuleReport.ps1](Security/Get-FirewallRuleReport.ps1) | Reports local active firewall profiles and selected rules with their port, address, application, and service filters. |
 
@@ -61,12 +65,14 @@
 
 | Script | What it does |
 |---|---|
+| [Get-InstalledSoftwareAudit.ps1](Software/Get-InstalledSoftwareAudit.ps1) | Audits registry/AppX registrations, optional loaded-user scope and baseline differences. |
 | [Get-InstalledSoftware.ps1](Software/Get-InstalledSoftware.ps1) | Exports installed desktop application names and versions. |
 
 ## Storage and Permissions
 
 | Script | What it does |
 |---|---|
+| [Clear-TemporaryFiles.ps1](Storage-and-Permissions/Clear-TemporaryFiles.ps1) | Plans or removes old regular files from known temporary and optional closed-browser cache folders. |
 | [Export-FolderPermissions.ps1](Storage-and-Permissions/Export-FolderPermissions.ps1) | Exports folder owners and NTFS permission entries for a local or network folder. |
 | [Find-LargeFiles.ps1](Storage-and-Permissions/Find-LargeFiles.ps1) | Lists the largest files in a chosen folder without deleting anything. |
 | [Get-DiskSpaceReport.ps1](Storage-and-Permissions/Get-DiskSpaceReport.ps1) | Reports drive space and flags volumes below your free-space limits. |
@@ -77,6 +83,7 @@
 
 | Script | What it does |
 |---|---|
+| [Repair-WindowsSystemFiles.ps1](Troubleshooting/Repair-WindowsSystemFiles.ps1) | Plans or automates DISM repair followed by SFC with logs, native result handling and separate restart confirmation. |
 | [Collect-SupportEvidence.ps1](Troubleshooting/Collect-SupportEvidence.ps1) | Packages local device, disk, network, and recent event details for a support ticket. |
 | [Export-RecentEventErrors.ps1](Troubleshooting/Export-RecentEventErrors.ps1) | Exports recent critical/error events, with optional warnings. |
 | [Get-PendingRestartStatus.ps1](Troubleshooting/Get-PendingRestartStatus.ps1) | Reports common Windows indicators that a restart or naming/domain change is pending. |
@@ -102,6 +109,7 @@
 
 | Script | What it does |
 |---|---|
+| [Set-TechnicianPowerSettings.ps1](Workstation-Setup/Set-TechnicianPowerSettings.ps1) | Plans or applies sleep/hibernate/display timers and supported USB power controls with original-value recovery. |
 | [Test-WorkstationReadiness.ps1](Workstation-Setup/Test-WorkstationReadiness.ps1) | Checks disk space, domain membership, encryption, applications, and services against your JSON baseline. |
 
 
@@ -195,3 +203,15 @@ See [Veeam usage and scope](VEEAM-GUIDE.md) and [Veeam validation](VEEAM-VALIDAT
 | [Test-StorageAndPrintSetup.ps1](Server-Setup-Validation/Test-StorageAndPrintSetup.ps1) | Tests file-server, print-server, and FSRM setup behavior with mocked Windows management commands. |
 
 See [server setup instructions](SERVER-SETUP-GUIDE.md) and [validation results](SERVER-SETUP-VALIDATION.md).
+
+## Technician Tools Validation
+
+| Script | What it does |
+|---|---|
+| [Invoke-TechnicianToolsValidation.ps1](Technician-Tools-Validation/Invoke-TechnicianToolsValidation.ps1) | Checks the eight-tool package and runs all four isolated validation suites. |
+| [Test-HardwareSoftwareAudits.ps1](Technician-Tools-Validation/Test-HardwareSoftwareAudits.ps1) | Tests peripheral, monitor and software inventory behavior using fixtures. |
+| [Test-Php2ShellAudit.ps1](Technician-Tools-Validation/Test-Php2ShellAudit.ps1) | Tests PHP version rules and safe XML/path handling. |
+| [Test-PowerSettingsMock.ps1](Technician-Tools-Validation/Test-PowerSettingsMock.ps1) | Tests power planning, policy and USB controls without changing devices. |
+| [Test-RepairCleanupSafety.ps1](Technician-Tools-Validation/Test-RepairCleanupSafety.ps1) | Tests servicing, spool recovery and cleanup safeguards using mocks. |
+
+Usage and examples: [Technician tools](TECHNICIAN-TOOLS.md). Verification: [validation results](TECHNICIAN-TOOLS-VALIDATION.md).

@@ -1,4 +1,4 @@
-﻿# ScriptLibrary
+# ScriptLibrary
 
 Scripts are grouped by operating system, then by the task you need to perform.
 
@@ -10,24 +10,27 @@ General Windows tools use Windows PowerShell 5.1. Veeam tools require the runtim
 |---|---|---:|
 | [Active Directory](Windows/Active-Directory) | Accounts, memberships, domain trust, Group Policy, and AD audits | 5 |
 | [Backup and Recovery](Windows/Backup-and-Recovery) | Windows Server Backup job and catalog evidence | 1 |
-| [Device Information](Windows/Device-Information) | Hardware inventory, batteries, and driver issues | 3 |
+| [Device Information](Windows/Device-Information) | Hardware, connected peripherals/monitors, batteries, and driver issues | 5 |
 | [Network and DNS](Windows/Network-and-DNS) | Connectivity, DNS, DHCP, remote desktop, mapped drives, and time | 6 |
-| [Printing](Windows/Printing) | Printers, ports, queues, and spooler diagnostics | 1 |
-| [Security](Windows/Security) | Certificate metadata and firewall rule evidence | 2 |
+| [Printing](Windows/Printing) | Printers, ports, queues, spooler diagnostics, and guarded cache recovery | 2 |
+| [Security](Windows/Security) | Certificates, firewall evidence, and PHP2Shell exposure audit | 3 |
 | [Server Setup](Windows/Server-Setup) | Windows Server 2022/2025 role and baseline setup; SQL prerequisites only; confirmed restarts | 15 |
 | [Server Setup Validation](Windows/Server-Setup-Validation) | Mocked server setup tests and package validation | 6 |
 | [Services](Windows/Services) | Windows services and scheduled tasks | 2 |
-| [Software](Windows/Software) | Installed application inventory | 1 |
-| [Storage and Permissions](Windows/Storage-and-Permissions) | Disk capacity, file sizes, storage health, permissions, and SMB handles | 5 |
-| [Troubleshooting](Windows/Troubleshooting) | Events, evidence packages, updates, performance, profiles, restarts, and system files | 8 |
+| [Software](Windows/Software) | Installed application audit and optional inventory baseline comparison | 2 |
+| [Storage and Permissions](Windows/Storage-and-Permissions) | Disk capacity, file sizes, storage health, permissions, SMB handles, and guarded cleanup | 6 |
+| [Troubleshooting](Windows/Troubleshooting) | Events, evidence packages, updates, performance, profiles, restarts, and system files | 9 |
 | [Veeam Backup and Replication v12](Windows/Veeam-Backup-and-Replication-v12) | Database, repository, WAN, proxy, job, session and recovery-point audits/tests | 17 |
 | [Veeam Microsoft 365](Windows/Veeam-Microsoft-365) | Auto-detected v7/v8 platform, database/cache, proxy, repository, job and protection audits/tests | 13 |
 | [Veeam Validation](Windows/Veeam-Validation) | Mocked code tests and package validation | 7 |
+| [Technician Tools Validation](Windows/Technician-Tools-Validation) | Isolated tests for servicing, PHP2Shell, peripherals, monitors, cleanup, software and power | 5 |
 | [Virtualization](Windows/Virtualization) | Hyper-V VM, integration, storage-path, and checkpoint evidence | 1 |
 | [Web Services](Windows/Web-Services) | IIS websites, bindings, application pools, and recent events | 1 |
-| [Workstation Setup](Windows/Workstation-Setup) | Readiness checks against an editable baseline | 1 |
+| [Workstation Setup](Windows/Workstation-Setup) | Readiness checks and guarded power/USB settings | 2 |
 
-There are 82 operational Windows scripts and 13 code-validation scripts. See the [complete script index](Windows/SCRIPT-INDEX.md) and [examples for the 20 new tools](Windows/NEW-SCRIPTS.md). Validation details are in [Windows/VALIDATION.md](Windows/VALIDATION.md). Veeam usage and examples are in [Windows/VEEAM-GUIDE.md](Windows/VEEAM-GUIDE.md); Veeam test results are in [Windows/VEEAM-VALIDATION.md](Windows/VEEAM-VALIDATION.md). Server setup instructions are in [Windows/SERVER-SETUP-GUIDE.md](Windows/SERVER-SETUP-GUIDE.md), with [validation results](Windows/SERVER-SETUP-VALIDATION.md).
+There are 90 operational Windows scripts and 18 code-validation scripts. See the [complete script index](Windows/SCRIPT-INDEX.md) and [examples for the 20 new tools](Windows/NEW-SCRIPTS.md). Validation details are in [Windows/VALIDATION.md](Windows/VALIDATION.md). Veeam usage and examples are in [Windows/VEEAM-GUIDE.md](Windows/VEEAM-GUIDE.md); Veeam test results are in [Windows/VEEAM-VALIDATION.md](Windows/VEEAM-VALIDATION.md). Server setup instructions are in [Windows/SERVER-SETUP-GUIDE.md](Windows/SERVER-SETUP-GUIDE.md), with [validation results](Windows/SERVER-SETUP-VALIDATION.md).
+
+The eight additional [technician tools](Windows/TECHNICIAN-TOOLS.md) cover DISM/SFC repair, PHP2Shell, connected peripherals/monitors, print queues/cache, temporary files, software audit and power/USB settings. Change tools default to plans; apply and required restarts are separately controlled. See [their validation results](Windows/TECHNICIAN-TOOLS-VALIDATION.md).
 
 Examples below assume your current directory is the ScriptLibrary root:
 
@@ -54,16 +57,26 @@ The example baseline is a starting point to customize, not a universal workstati
 
 ## Linux
 
-Linux is prepared for future shell scripts with these categories:
+45 Linux tools are grouped into the nine existing categories, with five tools per category. Debian and Ubuntu are the primary targets; explicit package/capability adapters also cover RHEL derivatives, Fedora, Amazon Linux, SUSE/openSUSE, Arch/Manjaro and Alpine. See [the Linux guide](Linux/GUIDE.md), [complete index](Linux/SCRIPT-INDEX.md), and [validation results](Linux/VALIDATION.md) for implemented operations and limits.
 
-- Device-Information
-- Network-and-DNS
-- Printing
-- Services
-- Software
-- Storage-and-Permissions
-- Troubleshooting
-- Users-and-Groups
-- Workstation-Setup
+| Category | Purpose | Scripts |
+|---|---|---:|
+| [Device Information](Linux/Device-Information) | Hardware, firmware, batteries and virtualization readiness | 5 |
+| [Network and DNS](Linux/Network-and-DNS) | Connectivity, resolvers, firewall evidence, remote access and static IPv4 plans | 5 |
+| [Printing](Linux/Printing) | CUPS inventory, connectivity, new queues, recovery and sanitized export | 5 |
+| [Services](Linux/Services) | Service health/state, scheduled jobs, web services and time synchronization | 5 |
+| [Software](Linux/Software) | Package inventory, health, repositories, update planning and approved installation | 5 |
+| [Storage and Permissions](Linux/Storage-and-Permissions) | Capacity, large/deleted-open files, permissions, shares and storage layout | 5 |
+| [Troubleshooting](Linux/Troubleshooting) | Support bundles, performance, boot/kernel errors, policy denials and restart evidence | 5 |
+| [Users and Groups](Linux/Users-and-Groups) | Accounts, elevated/SSH access, local provisioning and domain integration | 5 |
+| [Workstation Setup](Linux/Workstation-Setup) | Support tools, baseline, time sources, additive firewall allowances and readiness | 5 |
 
-The .gitkeep files retain empty category folders in Git. All .ps1 scripts belong under Windows.
+Copy the complete Linux folder, including `lib/common.inc`, to the Linux computer. Audit results retain Unknown when tools, permissions or evidence are missing. Setup tools default to plans, require `--apply`, and ask separately before service restarts or network activation. `--defer-restarts` defers those actions and package installation that could restart services.
+
+```sh
+sh Linux/Device-Information/get-device-information.sh
+sh Linux/Software/plan-system-updates.sh
+sh Linux/Services/configure-service-state.sh --help
+```
+
+Reports default to Linux/Reports and are ignored by Git. These adapters passed source and command-fixture validation on the available Windows shell runtime; live distribution/VM integration remains to be tested in your environment. All .ps1 scripts stay under Windows.

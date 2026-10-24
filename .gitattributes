@@ -1,0 +1,4 @@
+Linux/**/*.sh text eol=lf
+Linux/**/*.inc text eol=lf
+Linux/**/*.py text eol=lf
+Linux/**/*.tsv text eol=lf
