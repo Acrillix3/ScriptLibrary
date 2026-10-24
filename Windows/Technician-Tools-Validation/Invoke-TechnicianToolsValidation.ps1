@@ -1,11 +1,11 @@
 <#
 What it does:
-  Validates the eight technician scripts and runs their isolated mock/fixture tests.
+  Validates the nine technician scripts and runs their isolated mock/fixture tests.
 Available flags:
   -WindowsRoot: Windows folder under test. -OutputDirectory: Test reports, default Windows\Reports.
 How it works:
   Checks source contracts in Windows PowerShell 5.1, then runs hardware/software, PHP, power,
-  repair and cleanup fixtures. No live repair, deletion, printer, PHP or power action is requested.
+  repair, cleanup and AMD GPU fixtures. No live repair, deletion, printer, PHP or power action is requested.
 #>
 #Requires -Version 5.1
 [CmdletBinding()]
@@ -25,7 +25,8 @@ $definitions=@(
     @{Path='Printing\Clear-PrinterQueueAndCache.ps1';Change=$true},
     @{Path='Storage-and-Permissions\Clear-TemporaryFiles.ps1';Change=$true},
     @{Path='Software\Get-InstalledSoftwareAudit.ps1';Change=$false},
-    @{Path='Workstation-Setup\Set-TechnicianPowerSettings.ps1';Change=$true}
+    @{Path='Workstation-Setup\Set-TechnicianPowerSettings.ps1';Change=$true},
+    @{Path='Troubleshooting\Reset-AmdGpuCache.ps1';Change=$true}
 )
 foreach($definition in $definitions){
     $file=Join-Path $WindowsRoot $definition.Path
@@ -59,6 +60,9 @@ $powerLine=@($power | Where-Object {[string]$_ -match '^Passed \d+ power setting
 if(-not $powerLine){throw 'Power suite did not complete.'}
 $powerCount=[int]([regex]::Match([string]$powerLine,'^Passed (\d+)').Groups[1].Value)
 $results.Add([pscustomobject]@{Suite='Power settings';Assertions=$powerCount;Result='Passed'})
+$amd=@(& (Join-Path $PSScriptRoot 'Test-AmdGpuCacheSafety.ps1') -WindowsRoot $WindowsRoot -OutputDirectory (Join-Path $OutputDirectory 'amd-gpu') | Where-Object {$_.PSObject.Properties['Assertions']})[-1]
+if(-not $amd -or $amd.Result -ne 'Passed'){throw 'AMD GPU suite did not complete.'}
+$results.Add([pscustomobject]@{Suite='AMD GPU cache and restart';Assertions=[int]$amd.Assertions;Result='Passed'})
 $summary=[pscustomobject]@{Status='Passed';Assertions=[int](($results | Measure-Object Assertions -Sum).Sum);PowerShellVersion=$PSVersionTable.PSVersion.ToString();Suites=$results.ToArray();OutputDirectory=$OutputDirectory;Scope='Source contracts, mocked providers, and private file fixtures only; no live configuration/remediation.'}
 $summary | ConvertTo-Json -Depth 7 | Set-Content -LiteralPath (Join-Path $OutputDirectory 'validation-summary.json') -Encoding UTF8
 $summary

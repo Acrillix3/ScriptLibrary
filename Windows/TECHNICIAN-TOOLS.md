@@ -1,9 +1,10 @@
 # Windows technician tools
 
-Eight standalone tools supplement the existing diagnostic scripts. Run them in Windows PowerShell 5.1. Repair and power configuration target Windows 11 and Windows Server 2022/2025; individual providers and driver controls may be unavailable on some installations. Each script starts with **What it does**, **Available flags**, and **How it works**. Use `Get-Help <script> -Full` for its parameter syntax.
+Nine standalone tools supplement the existing diagnostic scripts. Run them in Windows PowerShell 5.1. Repair and power configuration target Windows 11 and Windows Server 2022/2025; individual providers and driver controls may be unavailable on some installations. Each script starts with **What it does**, **Available flags**, and **How it works**. Use `Get-Help <script> -Full` for its parameter syntax.
 
 | Category | Script | Purpose |
 |---|---|---|
+| Troubleshooting | [Reset-AmdGpuCache.ps1](Troubleshooting/Reset-AmdGpuCache.ps1) | Known AMD shader-cache cleanup and separately confirmed graphics-device restart. |
 | Troubleshooting | [Repair-WindowsSystemFiles.ps1](Troubleshooting/Repair-WindowsSystemFiles.ps1) | DISM image repair followed by SFC, native logs and exit codes, separately confirmed restart. |
 | Security | [Test-Php2ShellExposure.ps1](Security/Test-Php2ShellExposure.ps1) | Local evidence for CVE-2026-109618 and CVE-2026-109619. |
 | Device Information | [Get-ConnectedPeripheralAudit.ps1](Device-Information/Get-ConnectedPeripheralAudit.ps1) | Present peripheral inventory, driver/problem metadata, optional serial identifiers. |
@@ -40,7 +41,7 @@ The checker reads metadata without executing discovered binaries or sending expl
 
 ## Repair and cleanup
 
-The four change tools default to a plan. `-Apply` enables their guarded actions. `-WhatIf` previews an apply run and still writes the report. Elevation is required where Windows servicing, system Temp, spool recovery or machine power settings require it.
+The five change tools default to a plan. `-Apply` enables their guarded actions. `-WhatIf` previews an apply run and still writes the report. Elevation is required where Windows servicing, system Temp, spool recovery or machine power settings require it.
 
 ```powershell
 # Review, diagnose, then repair if appropriate.
@@ -100,3 +101,7 @@ Run the isolated tests from a native Windows PowerShell 5.1 session:
 ```
 
 See [validation details](TECHNICIAN-TOOLS-VALIDATION.md). Tests exercise mock providers and private fixtures; they do not perform servicing, cancel real print jobs, clean user folders, modify power settings or prove successful remediation on every driver/server. Configuration changes and PHP web-worker patch state need verification on the target machine.
+
+## AMD GPU reset
+
+Use the [AMD cache/driver reset guide](AMD-GPU-RESET.md) for preview/apply examples, multi-GPU selection, the optional shared DirectX cache and restart behavior. The same apply/WhatIf and separate restart controls apply.

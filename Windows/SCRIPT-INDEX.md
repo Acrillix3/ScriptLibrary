@@ -1,6 +1,6 @@
 # Windows script index
 
-90 operational PowerShell scripts and 18 code-validation scripts, grouped by task. Each script documents its own flags at the top. Reports default to Windows\Reports.
+91 operational PowerShell scripts and 19 code-validation scripts, grouped by task. Each script documents its own flags at the top. Reports default to Windows\Reports.
 
 ## Active Directory
 
@@ -83,6 +83,7 @@
 
 | Script | What it does |
 |---|---|
+| [Reset-AmdGpuCache.ps1](Troubleshooting/Reset-AmdGpuCache.ps1) | Plans or clears executing-user AMD shader caches and separately confirms an exact AMD graphics-device restart. |
 | [Repair-WindowsSystemFiles.ps1](Troubleshooting/Repair-WindowsSystemFiles.ps1) | Plans or automates DISM repair followed by SFC with logs, native result handling and separate restart confirmation. |
 | [Collect-SupportEvidence.ps1](Troubleshooting/Collect-SupportEvidence.ps1) | Packages local device, disk, network, and recent event details for a support ticket. |
 | [Export-RecentEventErrors.ps1](Troubleshooting/Export-RecentEventErrors.ps1) | Exports recent critical/error events, with optional warnings. |
@@ -208,6 +209,7 @@ See [server setup instructions](SERVER-SETUP-GUIDE.md) and [validation results](
 
 | Script | What it does |
 |---|---|
+| [Test-AmdGpuCacheSafety.ps1](Technician-Tools-Validation/Test-AmdGpuCacheSafety.ps1) | Tests AMD cache boundaries, explicit adapter selection, previews and separately confirmed device restart using mocks. |
 | [Invoke-TechnicianToolsValidation.ps1](Technician-Tools-Validation/Invoke-TechnicianToolsValidation.ps1) | Checks the eight-tool package and runs all four isolated validation suites. |
 | [Test-HardwareSoftwareAudits.ps1](Technician-Tools-Validation/Test-HardwareSoftwareAudits.ps1) | Tests peripheral, monitor and software inventory behavior using fixtures. |
 | [Test-Php2ShellAudit.ps1](Technician-Tools-Validation/Test-Php2ShellAudit.ps1) | Tests PHP version rules and safe XML/path handling. |
