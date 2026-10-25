@@ -59,6 +59,7 @@ with nullcontext(tempfile.mkdtemp(prefix="sl-network-", dir=args.work_dir)) as t
         allowed = "|".join(mocks)
         harness = (
             '. ' + shlex.quote(common) + '\n'
+            'LIBRARY_ROOT=' + shlex.quote(shell_path(ROOT)) + '\n'
             'REPORT_DIR=' + shlex.quote(shell_path(folder)) + '\n'
             'PATH=' + shlex.quote(shell_path(mock)) + ':/usr/bin:/bin; export PATH\n'
             'LOG=' + shlex.quote(shell_path(log)) + '; export LOG\n'

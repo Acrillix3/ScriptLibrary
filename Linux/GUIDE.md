@@ -2,7 +2,7 @@
 
 The library contains 45 tools: five in each existing category. The [script index](SCRIPT-INDEX.md) lists every tool. Each script begins with **What it does**, **Available flags**, and **How it works**.
 
-Copy the complete `Linux` folder to the Linux computer. The category scripts share `lib/common.inc`; copying an individual script without that file will produce a clear error. Run the tools with `sh`, so executable permissions are optional. Run only a trusted copy of this library: setup tools execute with the permissions of the invoking account.
+Copy the complete `Linux` folder to the Linux computer. The category scripts share `lib/common.inc`; the merged CUPS and SSH entrypoints also use `lib/cups-audit.inc` and `lib/ssh-audit.inc`. Copying an entrypoint without its dependencies produces a clear error. See [the consolidation guide](../CONSOLIDATION-GUIDE.md). Run the tools with `sh`, so executable permissions are optional. Run only a trusted copy of this library: setup tools execute with the permissions of the invoking account.
 
 ## Platforms and dependencies
 
@@ -100,6 +100,7 @@ See [validation results](VALIDATION.md). To rerun source and isolated fixture ch
 python3 Linux/tests/validate-library.py
 python3 Linux/tests/test-network-print-services.py
 python3 Linux/tests/test-software-users-workstation.py
+python3 Linux/tests/test-merged-linux-tools.py
 python3 Linux/tests/test-device-storage-troubleshooting.py
 ```
 

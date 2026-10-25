@@ -18,7 +18,12 @@ if(-not $OutputDirectory){$OutputDirectory=Join-Path $PSScriptRoot ('runs\'+[gui
 $OutputDirectory=(New-Item -ItemType Directory -Path $OutputDirectory -Force).FullName
 $script:checks=0
 function Assert-Check {param([bool]$Condition,[string]$Message) if(-not $Condition){throw ('FAILED: '+$Message)};$script:checks++}
-function Get-TestSource {param([string]$Relative) Get-Content -LiteralPath (Join-Path $ScriptRoot $Relative) -Raw}
+function Get-TestSource {
+    param([string]$Relative)
+    # Native sequence fixtures target the shared engine; wrapper dispatch/schema has its own suite.
+    if($Relative -eq 'Troubleshooting\Repair-WindowsSystemFiles.ps1'){$Relative='lib\Invoke-WindowsIntegrityCore.ps1'}
+    Get-Content -LiteralPath (Join-Path $ScriptRoot $Relative) -Raw
+}
 function Replace-Function {
     param([string]$Text,[string]$Name,[string]$Replacement)
     $tokens=$null;$errors=$null;$ast=[System.Management.Automation.Language.Parser]::ParseInput($Text,[ref]$tokens,[ref]$errors)

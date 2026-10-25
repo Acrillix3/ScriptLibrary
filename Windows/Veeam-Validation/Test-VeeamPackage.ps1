@@ -22,7 +22,11 @@ $checks=0
 function Assert-Package {param([bool]$Condition,[string]$Description) if(-not $Condition){throw ('FAIL: '+$Description)};$script:checks++}
 $categories=@('Veeam-Backup-and-Replication-v12','Veeam-Microsoft-365','Veeam-Validation')
 $files=@(foreach($category in $categories){Get-ChildItem -LiteralPath (Join-Path $WindowsRoot $category) -Filter *.ps1 -File})
-Assert-Package ($files.Count -ge 37) 'Thirty operational tools and seven validation scripts exist'
+Assert-Package ($files.Count -ge 38) 'Thirty public operational tools and eight validation scripts exist'
+$privateNames=@('Invoke-VeeamHostDiagnosticsCore.ps1','Invoke-VeeamConnectivityCore.ps1','Invoke-VeeamDatabaseHealthCore.ps1','Invoke-VbrClassicJobAuditCore.ps1','Veeam-AuditCommon.ps1')
+$privateFiles=@(foreach($name in $privateNames){Get-Item -LiteralPath (Join-Path (Join-Path $WindowsRoot 'lib') $name) -ErrorAction Stop})
+Assert-Package ($privateFiles.Count -eq 5) 'Merged Veeam cores and shared helper are shipped'
+$files+=@($privateFiles)
 foreach($file in $files){
     $tokens=$null;$errors=$null
     $ast=[Management.Automation.Language.Parser]::ParseFile($file.FullName,[ref]$tokens,[ref]$errors)

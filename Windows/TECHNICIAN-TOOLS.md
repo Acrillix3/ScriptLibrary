@@ -1,6 +1,6 @@
 # Windows technician tools
 
-Nine standalone tools supplement the existing diagnostic scripts. Run them in Windows PowerShell 5.1. Repair and power configuration target Windows 11 and Windows Server 2022/2025; individual providers and driver controls may be unavailable on some installations. Each script starts with **What it does**, **Available flags**, and **How it works**. Use `Get-Help <script> -Full` for its parameter syntax.
+Nine technician entrypoints supplement the existing diagnostic scripts. Run them in Windows PowerShell 5.1. Copy the complete Windows folder, including `lib`, for the shared inventory and integrity engines. See [consolidation details](../CONSOLIDATION-GUIDE.md). Repair and power configuration target Windows 11 and Windows Server 2022/2025; individual providers and driver controls may be unavailable on some installations. Each script starts with **What it does**, **Available flags**, and **How it works**. Use `Get-Help <script> -Full` for its parameter syntax.
 
 | Category | Script | Purpose |
 |---|---|---|
@@ -65,6 +65,8 @@ The five change tools default to a plan. `-Apply` enables their guarded actions.
 .\Windows\Storage-and-Permissions\Clear-TemporaryFiles.ps1 -OlderThanDays 14 `
     -IncludeSystemTemp -IncludeBrowserCache -Apply
 ```
+
+`Repair-WindowsSystemFiles.ps1 -Mode Check|Scan|Verify|Repair` selects explicit DISM/SFC behavior. Check, Scan and Verify are read-only execution modes; Repair still requires `-Apply`. Existing `-Diagnose` and default plan behavior remain. The older diagnostic entrypoint retains its `-ScanComponentStore` and `-VerifySystemFiles` flags.
 
 DISM uses `NoRestart`. A DISM failure or restart-required result stops the sequence before SFC. Native output and exit codes remain in the report; successful completion alone does not establish clean system files. If DISM requires a reboot, rerun after the separately approved restart to complete SFC. Windows Update may supply repair content unless `-LimitAccess` is selected. A source image must match the installed Windows version, edition, language and servicing level. The earlier diagnostic-only `Test-SystemFileHealth.ps1` remains available.
 

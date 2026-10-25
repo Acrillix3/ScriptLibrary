@@ -23,3 +23,11 @@ python3 Linux/tests/test-software-users-workstation.py
 ```
 
 Each runner accepts `--root` and `--shell` for an alternate library or shell executable. Fixtures can retain private local evidence in temporary folders; inspect their output. See [the Linux guide](GUIDE.md) and [script index](SCRIPT-INDEX.md).
+
+## Consolidation regression update — 2026-10-24
+
+All original **637 checks** remain passing. The new actual-entrypoint suite `tests/test-merged-linux-tools.py` adds **65 passing checks**, for **702 total**. It runs the four compatibility entrypoints from private copied library trees with fake CUPS, SSH, socket, key and configuration providers, checking legacy scope/filenames, Match contexts, redaction and failure states. Both new `.inc` collectors also passed dash syntax checks. No live Linux/CUPS/SSH/network operation was performed.
+
+```sh
+python3 Linux/tests/test-merged-linux-tools.py
+```

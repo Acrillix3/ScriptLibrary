@@ -1,6 +1,6 @@
 # Linux script index
 
-45 operational scripts, grouped into the nine existing categories. Copy the complete Linux folder: the tools use `lib/common.inc`.
+45 operational scripts, grouped into the nine existing categories. Copy the complete Linux folder: the tools use `lib/common.inc`, and the four merged CUPS/SSH entrypoints also use their private `.inc` collectors. See [consolidation details](../CONSOLIDATION-GUIDE.md).
 
 See [the Linux guide](GUIDE.md) for platform coverage, safeguards, examples, and validation.
 

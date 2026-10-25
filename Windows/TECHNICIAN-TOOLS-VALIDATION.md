@@ -1,6 +1,6 @@
 # Technician tools validation
 
-Validated on **2026-10-23** with native **Windows PowerShell 5.1.26100.9711**. All **416 assertions passed**.
+Validated on **2026-10-24** with native **Windows PowerShell 5.1.26100.9711**. All **967 assertions passed**.
 
 | Suite | Assertions | Evidence covered |
 |---|---:|---|
@@ -10,6 +10,8 @@ Validated on **2026-10-23** with native **Windows PowerShell 5.1.26100.9711**. A
 | Repair and cleanup | 29 | DISM failure/restart sequencing, full-entrypoint WhatIf reports, deferred/declined Spooler consent, mock stop/delete/restore, old/recent/changed files and path/reparse boundaries. |
 | Power settings | 36 | Setting GUIDs, seconds/zero values, AC/DC plan, exact USB identity/ancestry, policy failures, original-value recovery and full-entrypoint WhatIf with zero device/power writes. |
 | AMD GPU cache and restart | 73 | Known-cache boundaries, changed/locked files, AMD-only and multiple-device selection, previews, separate restart consent, native failures/reboot-required outcomes and stop-on-unverified-restart behavior. |
+| Merged Windows tools | 53 | Actual-wrapper software schema and DISM/SFC mode, error, WhatIf and restart compatibility using private fixtures. |
+| Implementation consolidation | 498 | Sixteen shared-core dependencies; 94 pre-merge Windows parameter names, types, validation/defaults and original positional order. |
 
 The repair/cleanup suite also passed its 29 checks on PowerShell 7.6.5. Actual servicing execution remains restricted by that script to elevated native 64-bit Windows PowerShell 5.1.
 
@@ -24,3 +26,5 @@ From the repository root in Windows PowerShell 5.1:
 ```
 
 Each suite can also run separately. The controller saves a structured validation summary under `Windows\Reports`; fixtures can retain local reports for inspection. See [the usage guide](TECHNICIAN-TOOLS.md) before applying changes.
+
+Consolidation coverage and platform limits are summarized in [the consolidation validation report](../CONSOLIDATION-VALIDATION.md).

@@ -1,6 +1,8 @@
 # Veeam audits and diagnostic tests
 
-30 tools are organized under **Veeam-Backup-and-Replication-v12** and **Veeam-Microsoft-365**. The Microsoft 365 category detects **v7 and v8**; optional commands and parameters are checked against the installed build. **Veeam-Validation** contains seven scripts for testing this code with mocked providers.
+30 tools are organized under **Veeam-Backup-and-Replication-v12** and **Veeam-Microsoft-365**. The Microsoft 365 category detects **v7 and v8**; optional commands and parameters are checked against the installed build. **Veeam-Validation** contains eight scripts for testing this code with mocked providers.
+
+Copy the complete Windows folder, including `lib`. The host, connectivity, database and classic backup/replication entrypoints now share private implementations while retaining their existing parameters, defaults and report identities. See [the consolidation guide](../CONSOLIDATION-GUIDE.md). Other Veeam tools remain independently callable.
 
 ## Start here
 

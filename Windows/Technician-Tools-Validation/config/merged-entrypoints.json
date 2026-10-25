@@ -1,0 +1,98 @@
+[
+  {
+    "Profile": "Legacy",
+    "Core": "Windows\\lib\\Invoke-SoftwareInventoryCore.ps1",
+    "Group": "M1",
+    "Public": "Windows\\Software\\Get-InstalledSoftware.ps1"
+  },
+  {
+    "Profile": "Audit",
+    "Core": "Windows\\lib\\Invoke-SoftwareInventoryCore.ps1",
+    "Group": "M1",
+    "Public": "Windows\\Software\\Get-InstalledSoftwareAudit.ps1"
+  },
+  {
+    "Profile": "Diagnostic",
+    "Core": "Windows\\lib\\Invoke-WindowsIntegrityCore.ps1",
+    "Group": "M2",
+    "Public": "Windows\\Troubleshooting\\Test-SystemFileHealth.ps1"
+  },
+  {
+    "Profile": "Repair",
+    "Core": "Windows\\lib\\Invoke-WindowsIntegrityCore.ps1",
+    "Group": "M2",
+    "Public": "Windows\\Troubleshooting\\Repair-WindowsSystemFiles.ps1"
+  },
+  {
+    "Profile": "VBR",
+    "Core": "Windows\\lib\\Invoke-VeeamHostDiagnosticsCore.ps1",
+    "Group": "M3",
+    "Public": "Windows\\Veeam-Backup-and-Replication-v12\\Get-VBRHostDiagnostics.ps1"
+  },
+  {
+    "Profile": "VBO",
+    "Core": "Windows\\lib\\Invoke-VeeamHostDiagnosticsCore.ps1",
+    "Group": "M3",
+    "Public": "Windows\\Veeam-Microsoft-365\\Get-VBOHostDiagnostics.ps1"
+  },
+  {
+    "Profile": "VBR",
+    "Core": "Windows\\lib\\Invoke-VeeamConnectivityCore.ps1",
+    "Group": "M4",
+    "Public": "Windows\\Veeam-Backup-and-Replication-v12\\Test-VBRConnectivity.ps1"
+  },
+  {
+    "Profile": "VBO",
+    "Core": "Windows\\lib\\Invoke-VeeamConnectivityCore.ps1",
+    "Group": "M4",
+    "Public": "Windows\\Veeam-Microsoft-365\\Test-VBOConnectivity.ps1"
+  },
+  {
+    "Profile": "VBR",
+    "Core": "Windows\\lib\\Invoke-VeeamDatabaseHealthCore.ps1",
+    "Group": "M5",
+    "Public": "Windows\\Veeam-Backup-and-Replication-v12\\Test-VBRDatabaseHealth.ps1"
+  },
+  {
+    "Profile": "VBO",
+    "Core": "Windows\\lib\\Invoke-VeeamDatabaseHealthCore.ps1",
+    "Group": "M5",
+    "Public": "Windows\\Veeam-Microsoft-365\\Test-VBODatabaseHealth.ps1"
+  },
+  {
+    "Profile": "Backup",
+    "Core": "Windows\\lib\\Invoke-VbrClassicJobAuditCore.ps1",
+    "Group": "M6",
+    "Public": "Windows\\Veeam-Backup-and-Replication-v12\\Get-VBRBackupJobAudit.ps1"
+  },
+  {
+    "Profile": "Replication",
+    "Core": "Windows\\lib\\Invoke-VbrClassicJobAuditCore.ps1",
+    "Group": "M6",
+    "Public": "Windows\\Veeam-Backup-and-Replication-v12\\Get-VBRReplicationJobAudit.ps1"
+  },
+  {
+    "Profile": "inventory",
+    "Core": "Linux\\lib\\cups-audit.inc",
+    "Group": "M7",
+    "Public": "Linux\\Printing\\get-printer-inventory.sh"
+  },
+  {
+    "Profile": "export",
+    "Core": "Linux\\lib\\cups-audit.inc",
+    "Group": "M7",
+    "Public": "Linux\\Printing\\export-print-configuration.sh"
+  },
+  {
+    "Profile": "remote",
+    "Core": "Linux\\lib\\ssh-audit.inc",
+    "Group": "M8",
+    "Public": "Linux\\Network-and-DNS\\test-remote-access.sh"
+  },
+  {
+    "Profile": "access",
+    "Core": "Linux\\lib\\ssh-audit.inc",
+    "Group": "M8",
+    "Public": "Linux\\Users-and-Groups\\audit-ssh-access.sh"
+  }
+]

@@ -79,6 +79,7 @@ def scenario(name, values=None, *, apply=False, defer=True, family='debian', moc
     common.write_text((ROOT / 'lib/common.inc').read_text(encoding='utf-8').replace('/run/ostree-booted', '"$FIXTURE_FS/run/ostree-booted"'), encoding='utf-8', newline='\n')
     harness = (
         '. ' + shlex.quote(shell_path(common)) + '\n'
+        'LIBRARY_ROOT=' + shlex.quote(shell_path(ROOT)) + '\n'
         'REPORT_DIR=' + shlex.quote(shell_path(folder)) + '\n'
         'FIXTURE_FS=' + shlex.quote(shell_path(fs)) + '\n'
         'HOME="$FIXTURE_FS/home"; export HOME\n'

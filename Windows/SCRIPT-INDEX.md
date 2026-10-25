@@ -1,6 +1,6 @@
 # Windows script index
 
-91 operational PowerShell scripts and 19 code-validation scripts, grouped by task. Each script documents its own flags at the top. Reports default to Windows\Reports.
+91 public operational PowerShell entrypoints and 22 code-validation scripts, plus 7 private implementation files, grouped by task. Each script documents its own flags at the top. Reports default to Windows\Reports. Merged entrypoints require the complete Windows folder, including `lib`; see [the consolidation guide](../CONSOLIDATION-GUIDE.md).
 
 ## Active Directory
 
@@ -160,6 +160,7 @@
 
 | Script | What it does |
 |---|---|
+| [Test-MergedVeeamTools.ps1](Veeam-Validation/Test-MergedVeeamTools.ps1) | Tests product/default forwarding, report identity and isolated VBR/VB365 core execution. |
 | [Invoke-VeeamValidation.ps1](Veeam-Validation/Invoke-VeeamValidation.ps1) | Runs every included Veeam code-validation suite with mocked providers. |
 | [Test-VBOAudits.ps1](Veeam-Validation/Test-VBOAudits.ps1) | Runs Microsoft 365 v7/v8 platform, tenant, proxy, repository, job and protection mocks without contacting Veeam, Windows hosts, or databases. |
 | [Test-VBRInfrastructureAudits.ps1](Veeam-Validation/Test-VBRInfrastructureAudits.ps1) | Runs VBR repository, SOBR, WAN, proxy, platform and security mocks without contacting Veeam, Windows hosts, or databases. |
@@ -209,6 +210,8 @@ See [server setup instructions](SERVER-SETUP-GUIDE.md) and [validation results](
 
 | Script | What it does |
 |---|---|
+| [Test-ImplementationConsolidation.ps1](Technician-Tools-Validation/Test-ImplementationConsolidation.ps1) | Checks all sixteen merged entrypoints and 94 preserved Windows parameters, including positional order. |
+| [Test-MergedWindowsTools.ps1](Technician-Tools-Validation/Test-MergedWindowsTools.ps1) | Tests software/DISM compatibility through actual entrypoints and private mocked providers. |
 | [Test-AmdGpuCacheSafety.ps1](Technician-Tools-Validation/Test-AmdGpuCacheSafety.ps1) | Tests AMD cache boundaries, explicit adapter selection, previews and separately confirmed device restart using mocks. |
 | [Invoke-TechnicianToolsValidation.ps1](Technician-Tools-Validation/Invoke-TechnicianToolsValidation.ps1) | Checks the eight-tool package and runs all four isolated validation suites. |
 | [Test-HardwareSoftwareAudits.ps1](Technician-Tools-Validation/Test-HardwareSoftwareAudits.ps1) | Tests peripheral, monitor and software inventory behavior using fixtures. |
@@ -217,3 +220,17 @@ See [server setup instructions](SERVER-SETUP-GUIDE.md) and [validation results](
 | [Test-RepairCleanupSafety.ps1](Technician-Tools-Validation/Test-RepairCleanupSafety.ps1) | Tests servicing, spool recovery and cleanup safeguards using mocks. |
 
 Usage and examples: [Technician tools](TECHNICIAN-TOOLS.md). Verification: [validation results](TECHNICIAN-TOOLS-VALIDATION.md).
+
+## Private shared implementations
+
+These seven files are dependencies, not additional technician entrypoints. Use the existing category commands.
+
+| File | Shared responsibility |
+|---|---|
+| [Invoke-SoftwareInventoryCore.ps1](lib/Invoke-SoftwareInventoryCore.ps1) | Registry/AppX collection and compatible legacy/audit projections |
+| [Invoke-WindowsIntegrityCore.ps1](lib/Invoke-WindowsIntegrityCore.ps1) | DISM/SFC native execution, modes, reports and restart controls |
+| [Invoke-VeeamHostDiagnosticsCore.ps1](lib/Invoke-VeeamHostDiagnosticsCore.ps1) | VBR/VB365 host evidence |
+| [Invoke-VeeamConnectivityCore.ps1](lib/Invoke-VeeamConnectivityCore.ps1) | VBR/VB365 bounded endpoint evidence |
+| [Invoke-VeeamDatabaseHealthCore.ps1](lib/Invoke-VeeamDatabaseHealthCore.ps1) | VBR/VB365 database discovery and selected engine queries |
+| [Invoke-VbrClassicJobAuditCore.ps1](lib/Invoke-VbrClassicJobAuditCore.ps1) | Classic backup/replication job family collection |
+| [Veeam-AuditCommon.ps1](lib/Veeam-AuditCommon.ps1) | Veeam connection/version/report helpers used by the four merged Veeam cores |

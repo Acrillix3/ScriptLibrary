@@ -1,4 +1,4 @@
-﻿<#
+<#
 What it does:
   Runs Active-database discovery, connection parsing, compatibility and error mocks without contacting Veeam, Windows hosts, or databases.
 
@@ -180,7 +180,7 @@ try{
     Assert-DatabaseRedaction $result
 
     # Extract the actual shipped production helper definitions, not duplicated implementations.
-    $production=Join-Path (Join-Path $SourceRoot 'Veeam-Backup-and-Replication-v12') 'Test-VBRDatabaseHealth.ps1'
+    $production=Join-Path (Join-Path $SourceRoot 'lib') 'Invoke-VeeamDatabaseHealthCore.ps1'
     $tokens=$null;$problems=$null;$ast=[Management.Automation.Language.Parser]::ParseFile($production,[ref]$tokens,[ref]$problems)
     foreach($functionName in @('Resolve-VeeamDatabaseHost','ConvertFrom-VeeamPostgresMetadataCsv','Invoke-VeeamSqlMetadata')){
         $node=$ast.Find({param($item) $item -is [Management.Automation.Language.FunctionDefinitionAst] -and $item.Name -eq $functionName},$true)

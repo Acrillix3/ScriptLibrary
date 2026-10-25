@@ -135,7 +135,9 @@ function New-Object {
 $scriptNames=@('Get-VBRHostDiagnostics.ps1','Get-VBOHostDiagnostics.ps1','Test-VBRConnectivity.ps1','Test-VBOConnectivity.ps1','Test-VBORepositoryIntegrity.ps1','Test-VBRBackupValidation.ps1')
 $scriptPaths=@{}
 foreach($name in $scriptNames){
-    $matches=@(Microsoft.PowerShell.Management\Get-ChildItem -LiteralPath $SourceRoot -Filter $name -Recurse -File)
+    # Resolve the production category directly so retained Reports fixtures do not look like duplicate tools.
+    $category=if($name -match '-VBO'){'Veeam-Microsoft-365'}else{'Veeam-Backup-and-Replication-v12'}
+    $matches=@(Microsoft.PowerShell.Management\Get-Item -LiteralPath (Join-Path (Join-Path $SourceRoot $category) $name) -ErrorAction Stop)
     if($matches.Count -ne 1){throw ('SourceRoot must contain exactly one '+$name)}
     $scriptPaths[$name]=$matches[0].FullName
     $tokens=$null;$errors=$null;$ast=[System.Management.Automation.Language.Parser]::ParseFile($matches[0].FullName,[ref]$tokens,[ref]$errors)

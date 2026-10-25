@@ -19,7 +19,7 @@ if(-not $OutputDirectory){$OutputDirectory=Join-Path $WindowsRoot 'Reports'}
 $reportDirectory=Join-Path $OutputDirectory ('VeeamValidation-'+(Get-Date -Format yyyyMMdd-HHmmss)+'-'+[guid]::NewGuid().ToString('N').Substring(0,8))
 $null=New-Item -ItemType Directory -Path $reportDirectory -Force
 $engine=if($PSVersionTable.PSEdition -eq 'Core'){Join-Path $PSHOME 'pwsh.exe'}else{Join-Path $PSHOME 'powershell.exe'}
-$names=@('Test-VeeamPackage.ps1','Test-VBRJobAudits.ps1','Test-VBRInfrastructureAudits.ps1','Test-VBOAudits.ps1','Test-VeeamDatabaseAudits.ps1','Test-VeeamDiagnostics.ps1')
+$names=@('Test-VeeamPackage.ps1','Test-VBRJobAudits.ps1','Test-VBRInfrastructureAudits.ps1','Test-VBOAudits.ps1','Test-VeeamDatabaseAudits.ps1','Test-VeeamDiagnostics.ps1','Test-MergedVeeamTools.ps1')
 $rows=New-Object 'System.Collections.Generic.List[object]'
 foreach($name in $names){
     $path=Join-Path $PSScriptRoot $name

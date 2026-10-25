@@ -29,7 +29,14 @@ foreach ($path in $paths) {
     $tokens=$null; $parseErrors=$null
     $ast=[Management.Automation.Language.Parser]::ParseFile($path,[ref]$tokens,[ref]$parseErrors)
     Assert-Audit (@($parseErrors).Count -eq 0) ('Syntax '+$path)
-    $definitions=@($ast.FindAll({ param($node) $node -is [Management.Automation.Language.FunctionDefinitionAst] },$false) | ForEach-Object { $_.Extent.Text })
+    $functionAst=$ast
+    if([IO.Path]::GetFileName($path) -eq 'Get-InstalledSoftwareAudit.ps1'){
+        $core=Join-Path $StagedWindows 'lib\Invoke-SoftwareInventoryCore.ps1'
+        $coreTokens=$null;$coreErrors=$null
+        $functionAst=[Management.Automation.Language.Parser]::ParseFile($core,[ref]$coreTokens,[ref]$coreErrors)
+        if($coreErrors.Count){throw 'Shared software core did not parse.'}
+    }
+    $definitions=@($functionAst.FindAll({ param($node) $node -is [Management.Automation.Language.FunctionDefinitionAst] },$false) | ForEach-Object { $_.Extent.Text })
     . ([scriptblock]::Create($definitions -join [Environment]::NewLine))
     $text=Get-Content -LiteralPath $path -Raw
     foreach ($heading in @('What it does:','Available flags:','How it works:')) { Assert-Audit ($text.Contains($heading)) ($heading+' '+$path) }

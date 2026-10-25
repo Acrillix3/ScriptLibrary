@@ -22,13 +22,15 @@ General Windows tools use Windows PowerShell 5.1. Veeam tools require the runtim
 | [Troubleshooting](Windows/Troubleshooting) | Events, evidence packages, updates, performance, profiles, system files and AMD GPU cache/reset | 10 |
 | [Veeam Backup and Replication v12](Windows/Veeam-Backup-and-Replication-v12) | Database, repository, WAN, proxy, job, session and recovery-point audits/tests | 17 |
 | [Veeam Microsoft 365](Windows/Veeam-Microsoft-365) | Auto-detected v7/v8 platform, database/cache, proxy, repository, job and protection audits/tests | 13 |
-| [Veeam Validation](Windows/Veeam-Validation) | Mocked code tests and package validation | 7 |
-| [Technician Tools Validation](Windows/Technician-Tools-Validation) | Isolated tests for servicing, PHP2Shell, peripherals, monitors, cleanup, software, power and AMD GPU reset | 6 |
+| [Veeam Validation](Windows/Veeam-Validation) | Mocked code tests, merge compatibility and package validation | 8 |
+| [Technician Tools Validation](Windows/Technician-Tools-Validation) | Isolated tests for servicing, PHP2Shell, peripherals, monitors, cleanup, software, power, AMD reset and merge compatibility | 8 |
 | [Virtualization](Windows/Virtualization) | Hyper-V VM, integration, storage-path, and checkpoint evidence | 1 |
 | [Web Services](Windows/Web-Services) | IIS websites, bindings, application pools, and recent events | 1 |
 | [Workstation Setup](Windows/Workstation-Setup) | Readiness checks and guarded power/USB settings | 2 |
 
-There are 91 operational Windows scripts and 19 code-validation scripts. See the [complete script index](Windows/SCRIPT-INDEX.md) and [examples for the 20 new tools](Windows/NEW-SCRIPTS.md). Validation details are in [Windows/VALIDATION.md](Windows/VALIDATION.md). Veeam usage and examples are in [Windows/VEEAM-GUIDE.md](Windows/VEEAM-GUIDE.md); Veeam test results are in [Windows/VEEAM-VALIDATION.md](Windows/VEEAM-VALIDATION.md). Server setup instructions are in [Windows/SERVER-SETUP-GUIDE.md](Windows/SERVER-SETUP-GUIDE.md), with [validation results](Windows/SERVER-SETUP-VALIDATION.md).
+There are 91 public operational Windows entrypoints, 22 code-validation scripts and 7 private implementation files. See the [complete script index](Windows/SCRIPT-INDEX.md) and [examples for the 20 new tools](Windows/NEW-SCRIPTS.md). Validation details are in [Windows/VALIDATION.md](Windows/VALIDATION.md). Veeam usage and examples are in [Windows/VEEAM-GUIDE.md](Windows/VEEAM-GUIDE.md); Veeam test results are in [Windows/VEEAM-VALIDATION.md](Windows/VEEAM-VALIDATION.md). Server setup instructions are in [Windows/SERVER-SETUP-GUIDE.md](Windows/SERVER-SETUP-GUIDE.md), with [validation results](Windows/SERVER-SETUP-VALIDATION.md).
+
+The [consolidation guide](CONSOLIDATION-GUIDE.md) describes eight merged implementation groups. All sixteen existing command filenames remain compatible. **Copy the complete Windows or Linux folder, including its `lib` directory**; affected entrypoints now call shared implementations. [Consolidation validation](CONSOLIDATION-VALIDATION.md) covers the preserved parameters, report adapters and restart/query safeguards.
 
 The nine additional [technician tools](Windows/TECHNICIAN-TOOLS.md) cover DISM/SFC repair, PHP2Shell, connected peripherals/monitors, print queues/cache, temporary files, software audit, power/USB settings and [AMD GPU cache/driver reset](Windows/AMD-GPU-RESET.md). Change tools default to plans; apply and required restarts are separately controlled. See [their validation results](Windows/TECHNICIAN-TOOLS-VALIDATION.md).
 

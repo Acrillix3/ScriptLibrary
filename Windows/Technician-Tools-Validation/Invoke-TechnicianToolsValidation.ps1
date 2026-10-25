@@ -1,6 +1,6 @@
 <#
 What it does:
-  Validates the nine technician scripts and runs their isolated mock/fixture tests.
+  Validates the technician scripts, merged implementations and isolated mock/fixture tests.
 Available flags:
   -WindowsRoot: Windows folder under test. -OutputDirectory: Test reports, default Windows\Reports.
 How it works:
@@ -63,6 +63,12 @@ $results.Add([pscustomobject]@{Suite='Power settings';Assertions=$powerCount;Res
 $amd=@(& (Join-Path $PSScriptRoot 'Test-AmdGpuCacheSafety.ps1') -WindowsRoot $WindowsRoot -OutputDirectory (Join-Path $OutputDirectory 'amd-gpu') | Where-Object {$_.PSObject.Properties['Assertions']})[-1]
 if(-not $amd -or $amd.Result -ne 'Passed'){throw 'AMD GPU suite did not complete.'}
 $results.Add([pscustomobject]@{Suite='AMD GPU cache and restart';Assertions=[int]$amd.Assertions;Result='Passed'})
+$merged=@(& (Join-Path $PSScriptRoot 'Test-MergedWindowsTools.ps1') -WindowsRoot $WindowsRoot -OutputDirectory (Join-Path $OutputDirectory 'merged-windows') | Where-Object {$_.PSObject.Properties['Assertions']})[-1]
+if(-not $merged -or $merged.Status -ne 'Passed'){throw 'Merged Windows suite did not complete.'}
+$results.Add([pscustomobject]@{Suite='Merged Windows tools';Assertions=[int]$merged.Assertions;Result='Passed'})
+$consolidation=@(& (Join-Path $PSScriptRoot 'Test-ImplementationConsolidation.ps1') -LibraryRoot (Split-Path ([IO.Path]::GetFullPath($WindowsRoot)) -Parent) | Where-Object {$_.PSObject.Properties['Assertions']})[-1]
+if(-not $consolidation -or $consolidation.Status -ne 'Passed'){throw 'Implementation consolidation contract suite did not complete.'}
+$results.Add([pscustomobject]@{Suite='Implementation consolidation';Assertions=[int]$consolidation.Assertions;Result='Passed'})
 $summary=[pscustomobject]@{Status='Passed';Assertions=[int](($results | Measure-Object Assertions -Sum).Sum);PowerShellVersion=$PSVersionTable.PSVersion.ToString();Suites=$results.ToArray();OutputDirectory=$OutputDirectory;Scope='Source contracts, mocked providers, and private file fixtures only; no live configuration/remediation.'}
 $summary | ConvertTo-Json -Depth 7 | Set-Content -LiteralPath (Join-Path $OutputDirectory 'validation-summary.json') -Encoding UTF8
 $summary
